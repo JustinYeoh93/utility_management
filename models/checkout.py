@@ -1,4 +1,5 @@
 from sqlalchemy import String, Column, Enum, ForeignKey, DateTime
+from sqlalchemy.orm import relationship
 from database import Base
 import enum
 

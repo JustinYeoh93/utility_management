@@ -1,5 +1,8 @@
 from sqlalchemy import String, Column
+from sqlalchemy.orm import relationship
 from database import Base
+
+from models.admin import admin_table
 
 
 class Utility(Base):

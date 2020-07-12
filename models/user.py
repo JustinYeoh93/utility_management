@@ -1,5 +1,6 @@
 from sqlalchemy import String, Column
-from admin import admin_table
+from sqlalchemy.orm import relationship
+from models.admin import admin_table
 
 from database import Base
 
