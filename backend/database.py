@@ -1,12 +1,10 @@
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from starlette.config import Config
 
-import settings
+config = Config(".env")
 
-import os
-
-SQLALCHEMY_DATABASE_URL = os.getenv("POSTGRESQL_DATABASE_URL")
+SQLALCHEMY_DATABASE_URL = config("POSTGRESQL_DATABASE_URL")
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
