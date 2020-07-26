@@ -1,7 +1,6 @@
 from sqlalchemy import Column, String, Float, ForeignKey, Table
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-from cuid import cuid
 
 Base = declarative_base()
 
@@ -21,7 +20,6 @@ class Room(Base):
     __tablename__ = "rooms"
     id = Column(String, primary_key=True)
     room_name = Column(String)
-    password = Column(String)
     admin_id = Column(String, ForeignKey("users.id"))
 
     room_admin = relationship("User", back_populates="admin_rooms")
