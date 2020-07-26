@@ -1,11 +1,5 @@
 from fastapi import FastAPI
 
-import models.admin_repository.schema
-import models.checkout_repository.schema
-import models.user_repository.schema
-import models.utility_repository.schema
-
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -13,14 +7,21 @@ from sqlalchemy.orm import sessionmaker
 import settings
 import os
 
-SQLALCHEMY_DATABASE_URL = os.getenv("POSTGRESQL_DATABASE_URL")
+from starlette.graphql import GraphQLApp
+from starlette.datastructures import Secret
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
+from graphql_repo.mutation import Mutation
+from graphql_repo.schema import Query
 
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-Base.metadata.create_all(bind=engine)
+import graphene
+import uvicorn
 
 app = FastAPI()
 
-app.add_middleware()
+
+app.add_route("/", GraphQLApp(schema=graphene.Schema(query=Query, mutation=Mutation)))
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+

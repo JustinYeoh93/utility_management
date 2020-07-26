@@ -16,6 +16,7 @@ psycopg2 = "^2.8.5"
 python-dotenv = "^0.14.0"
 cuid = "^0.3"
 black = "^19.10b0"
+graphene = "^2.1.8"
 
 [tool.poetry.dev-dependencies]
 autopep8 = "^1.5.3"
